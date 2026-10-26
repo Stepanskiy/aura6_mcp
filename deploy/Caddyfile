@@ -1,0 +1,14 @@
+{
+	email {$ACME_EMAIL}
+}
+
+# Keycloak (OAuth / OIDC)
+{$AUTH_DOMAIN} {
+	reverse_proxy keycloak:8080
+}
+
+# MCP-сервер Аури. Поки коду немає — заглушка, щоб перевірити DNS і сертифікат.
+{$MCP_DOMAIN} {
+	respond "Aura 6 MCP: not deployed yet" 200
+	# reverse_proxy aura-mcp:3000
+}
