@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/* Креативна тема: електрик-фіолетовий замість індиго у всіх модулях, шрифти з характером. */
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Unbounded", "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --color-indigo-50: #f6f2ff;
+  --color-indigo-100: #ece4ff;
+  --color-indigo-200: #dccbff;
+  --color-indigo-300: #c3a5ff;
+  --color-indigo-400: #a678ff;
+  --color-indigo-500: #8b4dff;
+  --color-indigo-600: #7a2cf5;
+  --color-indigo-700: #6a1fdc;
+  --color-indigo-800: #561bb2;
+  --color-indigo-900: #44188a;
+}
+
+@layer base {
+  body {
+    background:
+      radial-gradient(1200px 600px at 100% -10%, #ffe4f3 0%, transparent 60%),
+      radial-gradient(900px 500px at -10% 10%, #ede4ff 0%, transparent 55%),
+      radial-gradient(900px 600px at 50% 120%, #fff1dc 0%, transparent 60%),
+      #fbfaff;
+    background-attachment: fixed;
+  }
+  h1, h2, h3 { letter-spacing: -0.01em; }
+}
+
+@utility bg-juicy {
+  background-image: linear-gradient(120deg, #7a2cf5 0%, #d946ef 48%, #ff7a45 100%);
+}
+@utility text-juicy {
+  background-image: linear-gradient(110deg, #7a2cf5 0%, #d946ef 50%, #ff7a45 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, -16px) scale(1.06); }
+}
+.blob { animation: floaty 12s ease-in-out infinite; filter: blur(40px); }
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
+}
