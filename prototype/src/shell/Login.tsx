@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { useStore } from "../store";
 import { Button, Field, Input } from "../ui";
-import { Logo } from "./Layout";
+import { A6Mark } from "./Layout";
 
 /** Простий вхід без ролей: лише ім’я для історії змін. */
 export function Login() {
@@ -15,9 +15,9 @@ export function Login() {
       <div className="blob absolute -bottom-32 left-1/3 h-96 w-96 rounded-full bg-orange-400/40 [animation-delay:-8s]" />
       <div className="relative grid w-full max-w-4xl items-center gap-10 md:grid-cols-2">
         <div className="text-white">
-          <div className="mb-6 flex items-center gap-3">
-            <Logo size={44} />
-            <span className="font-display text-2xl font-semibold">Аура 6</span>
+          <A6Mark gradient className="mb-6 w-56 drop-shadow-[0_10px_30px_rgba(217,70,239,0.45)]" title="Аура 6" />
+          <div className="mb-5 font-display text-xl font-semibold">
+            Аура 6 <span className="ml-1 text-sm font-medium text-violet-200/70">управлінський облік проєктів</span>
           </div>
           <h1 className="font-display text-4xl font-semibold leading-tight">
             Медіаплани, рахунки й маржа <span className="bg-gradient-to-r from-lime-300 via-cyan-300 to-fuchsia-300 bg-clip-text text-transparent">без рутини</span>

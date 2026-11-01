@@ -2,7 +2,7 @@
 // Запущений застосунок відкривається ліворуч, розмова лишається на місці.
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Eye, MessageCircleHeart, SendHorizontal, Sparkles, Trash2, X } from "lucide-react";
+import { Eye, SendHorizontal, Sparkles, Trash2, X, MessagesSquare } from "lucide-react";
 import { useStore } from "../../store";
 import { llmConfigured, type ChatMessage } from "../../llm/openrouter";
 import { Alert, Badge, clsx } from "../../ui";
@@ -127,7 +127,7 @@ export function ChatPanel() {
         <div className="blob absolute -left-10 -bottom-16 h-32 w-32 rounded-full bg-violet-500/50 [animation-delay:-6s]" />
         <div className="relative flex items-center gap-3">
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-juicy shadow-lg shadow-fuchsia-500/40">
-            <MessageCircleHeart size={19} />
+            <Sparkles size={19} />
           </span>
           <div className="min-w-0 flex-1">
             <div className="font-display text-[15px] font-semibold">Помічник</div>
@@ -142,7 +142,7 @@ export function ChatPanel() {
           </button>
         </div>
         <div className="relative mt-3 flex items-center gap-1 rounded-xl bg-white/10 p-1 text-xs font-semibold">
-          {([["chat", "Розмова", Sparkles], ["model", "Що бачила модель", Eye]] as const).map(([v, label, I]) => (
+          {([["chat", "Розмова", MessagesSquare], ["model", "Що бачила модель", Eye]] as const).map(([v, label, I]) => (
             <button key={v} onClick={() => setView(v)} className={clsx("flex flex-1 items-center justify-center gap-1.5 rounded-lg px-2 py-1.5 transition", view === v ? "bg-white text-violet-800 shadow" : "text-violet-100 hover:bg-white/10")}>
               <I size={14} /> {label}
             </button>
@@ -248,7 +248,7 @@ export function ChatFab() {
       title="Помічник"
       className="no-print fixed bottom-6 right-6 z-30 grid h-14 w-14 place-items-center rounded-2xl bg-juicy text-white shadow-xl shadow-fuchsia-500/40 transition hover:-translate-y-1 hover:rotate-[-6deg]"
     >
-      <MessageCircleHeart size={26} />
+      <Sparkles size={26} />
       <span className="absolute -right-1 -top-1 h-3.5 w-3.5 rounded-full bg-lime-300 ring-2 ring-white" />
     </button>
   );

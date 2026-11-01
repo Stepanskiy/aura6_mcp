@@ -7,7 +7,6 @@ import {
   FileSpreadsheet,
   FolderKanban,
   ListChecks,
-  MessageCircleHeart,
   RefreshCcw,
   Sparkles,
   Wand2,
@@ -15,6 +14,7 @@ import {
 import { useStore } from "../store";
 import { fmtMoney0, fmtPct, totals } from "../domain/calc";
 import { useInvoiced } from "./hooks";
+import { A6Mark } from "./Layout";
 import { GRADIENTS, IconBubble, Stat, clsx, type GradientName, type Icon } from "../ui";
 
 interface Tile {
@@ -35,7 +35,7 @@ const TILES: Tile[] = [
   { group: "Фінанси", to: "/invoices/new", title: "Рахунок клієнту", text: "За період, кілька брендів — один документ", icon: Wand2, gradient: "orange" },
   { group: "Фінанси", to: "/invoices/reconciliation", title: "Звірка", text: "План — виставлено — не виставлено", icon: ListChecks, gradient: "amber" },
   { group: "Аналітика", to: "/reports", title: "Конструктор звітів", text: "Клієнти, бренди, носії, місяці — будь-які розрізи", icon: BarChart3, gradient: "cyan" },
-  { group: "Аналітика", to: "/chat", title: "Чат-помічник", text: "Скажіть, що потрібно, — відкриє потрібний екран", icon: MessageCircleHeart, gradient: "rose", tag: "AI" },
+  { group: "Аналітика", to: "/chat", title: "Чат-помічник", text: "Скажіть, що потрібно, — відкриє потрібний екран", icon: Sparkles, gradient: "rose", tag: "AI" },
 ];
 
 export function Catalog() {
@@ -51,6 +51,7 @@ export function Catalog() {
         <div className="blob absolute -left-16 -top-20 h-72 w-72 rounded-full bg-violet-500/60" />
         <div className="blob absolute right-10 -top-16 h-72 w-72 rounded-full bg-fuchsia-500/50 [animation-delay:-5s]" />
         <div className="blob absolute -bottom-24 right-1/3 h-72 w-72 rounded-full bg-orange-400/40 [animation-delay:-9s]" />
+        <A6Mark className="pointer-events-none absolute -bottom-10 right-6 w-[420px] text-white opacity-[0.07]" />
         <div className="relative flex flex-wrap items-end justify-between gap-6">
           <div>
             <div className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-bold ring-1 ring-white/20">
@@ -69,7 +70,7 @@ export function Catalog() {
               <FileSpreadsheet size={17} /> Завантажити Excel
             </Link>
             <Link to="/chat" className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2.5 text-sm font-bold text-white ring-1 ring-white/25 transition hover:bg-white/20">
-              <MessageCircleHeart size={17} /> Спитати помічника
+              <Sparkles size={17} /> Спитати помічника
             </Link>
           </div>
         </div>

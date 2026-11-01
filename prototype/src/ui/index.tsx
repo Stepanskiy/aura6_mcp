@@ -7,7 +7,6 @@ import {
   BarChart3,
   FileSpreadsheet,
   ListChecks,
-  MessageCircleHeart,
   Settings,
   CheckCircle2,
   CircleDollarSign,
@@ -63,7 +62,7 @@ function pageLook(title: ReactNode): { icon: Icon; gradient: GradientName } | un
   if (t.includes("рахун") || t.includes("замовлення")) return { icon: Receipt, gradient: "orange" };
   if (t.includes("імпорт")) return { icon: FileSpreadsheet, gradient: "lime" };
   if (t.includes("звіт") || t.includes("конструктор")) return { icon: BarChart3, gradient: "cyan" };
-  if (t.includes("чат")) return { icon: MessageCircleHeart, gradient: "rose" };
+  if (t.includes("чат")) return { icon: Sparkles, gradient: "rose" };
   if (t.includes("налаштув")) return { icon: Settings, gradient: "teal" };
   if (t.includes("проєкт")) return { icon: FolderKanban, gradient: "violet" };
   return undefined;
