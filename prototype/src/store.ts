@@ -109,7 +109,11 @@ export const useStore = create<Store>()(
         updateSettings: (patch) => set((s) => ({ settings: { ...s.settings, ...patch } })),
         resetDemoData: () => {
           // Запамʼятовані зіставлення імпорту (features/import/aliases.ts) скидаються разом з даними.
-          try { localStorage.removeItem("aura6-import-aliases"); } catch { /* немає localStorage */ }
+          try {
+            localStorage.removeItem("aura6-import-aliases");
+            // Дані медійних модулів (підключені кабінети, завантажена статистика) — ключі aura6-media*.
+            for (const k of Object.keys(localStorage)) if (k.startsWith("aura6-media")) localStorage.removeItem(k);
+          } catch { /* немає localStorage */ }
           set({ ...emptyData(), ...createSeed() });
         },
 

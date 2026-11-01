@@ -26,7 +26,7 @@ export const LAUNCH: Record<string, LaunchSpec> = {
     path: "/projects/:code",
     title: "Картка проєкту",
     description: "Медіаплан, версії плану, історія змін",
-    params: { tab: "works | versions | history" },
+    params: { tab: "works | flowchart | map | kpi | cabinets | versions | history (медійні вкладки — лише якщо застосовні до медіаплану)" },
   },
   import: {
     path: "/import",

@@ -10,8 +10,10 @@ import { StatusBadge, period } from "./common";
 import { WorksTab } from "./WorksTab";
 import { VersionsTab } from "./VersionsTab";
 import { HistoryTab } from "./HistoryTab";
+import { PROJECT_VIEWS } from "../media/registry";
+import { mediaOfWork } from "../media/util";
 
-const TABS = [
+const BASE_TABS = [
   { id: "works", label: "Медіаплан" },
   { id: "versions", label: "Версії плану" },
   { id: "history", label: "Історія змін" },
@@ -40,7 +42,16 @@ export function ProjectCard() {
     );
   }
 
+  // Медійні вкладки (карта, календар, ефективність…) — лише ті, що застосовні до медіаплану проєкту.
+  const mediaViews = PROJECT_VIEWS.filter((v) => v.applies(works, (w) => mediaOfWork(w, refs)));
+  const TABS: { id: string; label: string; view?: (typeof PROJECT_VIEWS)[number] }[] = [
+    BASE_TABS[0],
+    ...mediaViews.map((v) => ({ id: v.id, label: v.title, view: v })),
+    BASE_TABS[1],
+    BASE_TABS[2],
+  ];
   const tab = TABS.find((x) => x.id === sp.get("tab"))?.id ?? "works";
+  const activeView = mediaViews.find((v) => v.id === tab);
   const client = refs.clients.get(project.clientId);
   const brand = project.brandId ? refs.brands.get(project.brandId)?.name : undefined;
   const direction = project.directionId ? refs.directions.get(project.directionId)?.name : undefined;
@@ -89,17 +100,19 @@ export function ProjectCard() {
         <Stat label="Закрито (дохід), грн" value={fmtMoney0(t.closedIncome)} sub={fmtPct(t.income ? t.closedIncome / t.income : undefined)} />
       </div>
 
-      <div className="mb-4 flex gap-1 border-b border-slate-200">
+      <div className="mb-4 flex gap-1 overflow-x-auto border-b border-slate-200">
         {TABS.map((x) => (
           <button
             key={x.id}
             onClick={() => setSp({ tab: x.id }, { replace: true })}
             className={clsx(
-              "-mb-px border-b-2 px-4 py-2 text-sm font-medium transition",
+              "-mb-px flex items-center gap-1.5 border-b-2 px-4 py-2 text-sm font-medium transition",
               tab === x.id ? "border-indigo-600 text-indigo-700" : "border-transparent text-slate-500 hover:text-slate-800",
             )}
           >
+            {x.view && <x.view.icon size={15} />}
             {x.label}
+            {x.view?.badge && <span className="rounded-full bg-gradient-to-r from-lime-300 to-cyan-300 px-1.5 py-px text-[10px] font-extrabold text-[#160b2e]">{x.view.badge}</span>}
           </button>
         ))}
       </div>
@@ -107,6 +120,7 @@ export function ProjectCard() {
       {tab === "works" && <WorksTab project={project} works={works} />}
       {tab === "versions" && <VersionsTab project={project} works={works} />}
       {tab === "history" && <HistoryTab project={project} />}
+      {activeView && <activeView.Component project={project} works={works} />}
     </Page>
   );
 }

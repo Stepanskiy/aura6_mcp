@@ -28,8 +28,8 @@ export const TOOLS: ToolDef[] = [
   ),
   def(
     "open_project",
-    "Відкриває картку одного проєкту за кодом (напр. KST-0015): медіаплан, версії плану, історія змін. Фрази: «відкрий проєкт KST-0015», «покажи історію змін RZT-0018». Код береш тільки зі слів користувача. Не для створення проєкту — для цього open_project_new.",
-    { code: str("Код проєкту, напр. KST-0015."), tab: { type: "string", enum: ["works", "versions", "history"], description: "Вкладка: works — роботи медіаплану, versions — версії плану, history — історія змін." } },
+    "Відкриває картку одного проєкту за кодом (напр. KST-0015): медіаплан, календар виходів, карта площин (OOH), ефективність діджиталу, рекламні кабінети, версії плану, історія змін. Фрази: «відкрий проєкт KST-0015», «покажи історію змін RZT-0018», «карта площин LFC-0018», «флоучарт по RZT-0021», «ефективність діджиталу по RZT-0021», «підключи кабінет Meta для цього проєкту». Код береш тільки зі слів користувача. Не для створення проєкту — для цього open_project_new.",
+    { code: str("Код проєкту, напр. KST-0015."), tab: { type: "string", enum: ["works", "flowchart", "map", "kpi", "cabinets", "versions", "history"], description: "Вкладка: works — роботи медіаплану; flowchart — календар виходів (флоучарт) по носіях; map — карта площин зовнішньої реклами (OOH); kpi — ефективність діджиталу (покази, кліки, CTR, CPM, план/факт); cabinets — рекламні кабінети Meta, Google, TikTok (підключення, синхронізація статистики); versions — версії плану; history — історія змін." } },
     ["code"],
   ),
   def(
@@ -87,7 +87,7 @@ const LABELS: Record<string, string> = {
   q: "Пошук", client: "Клієнт", brand: "Бренд", year: "Рік", code: "Код проєкту", tab: "Вкладка", copyFrom: "Копія з", mode: "Режим",
   project: "Проєкт", from: "Період з", to: "Період по", rows: "Рядки", cols: "Колонки", measures: "Показники", preset: "Готовий звіт",
 };
-const TABS: Record<string, string> = { works: "Роботи", versions: "Версії плану", history: "Історія змін" };
+const TABS: Record<string, string> = { works: "Медіаплан", flowchart: "Календар виходів", map: "Карта площин", kpi: "Ефективність", cabinets: "Рекламні кабінети", versions: "Версії плану", history: "Історія змін" };
 const MODES: Record<string, string> = { budget: "Бюджети", final: "Фінальні суми" };
 
 function toList(v: unknown): string[] {
@@ -122,7 +122,7 @@ export function buildLaunch(tool: string, args: Record<string, unknown>): Launch
       const code = toStr(args.code);
       if (!code) return { tool, appTitle: spec.title, url: "", params: [], error: "Не вказано код проєкту" };
       path = spec.path.replace(":code", encodeURIComponent(code));
-      p.tab = ["works", "versions", "history"].includes(String(args.tab)) ? String(args.tab) : undefined;
+      p.tab = String(args.tab) in TABS ? String(args.tab) : undefined;
       break;
     }
     case "open_project_new": spec = LAUNCH.projectNew; path = spec.path; take("client", "copyFrom"); break;

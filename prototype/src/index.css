@@ -49,3 +49,6 @@
   .no-print { display: none !important; }
   body { background: white; }
 }
+
+/* Карта площин: приглушена підкладка OSM, щоб кольорові піни були головними. */
+.aura-tiles { filter: saturate(0.45) brightness(1.04) contrast(0.95); }
